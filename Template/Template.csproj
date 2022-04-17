@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>SimpleTemplate</PackageId>
+    <Title>Simple Template</Title>
+    <Authors>HANABI</Authors>
+    <PackageTags>dotnet-new;templates</PackageTags>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Content\**\*" Exclude="Content\**\bin\**;Content\**\obj\**;Content\**\Logs\**;Content\**\.vs\**;Content\**\Globalization.db;Content\src\**\.template.config" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack" Condition="'$(OS)' == 'Windows_NT'">
+		<Copy SourceFiles="$(ProjectDir)\bin\Release\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(ProjectDir)" />
+	</Target>
+
+</Project>

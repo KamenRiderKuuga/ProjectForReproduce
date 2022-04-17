@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "classifications": [
+    "WebApi"
+  ],
+  "name": "Simple Template",
+  "identity": "Simple Template",
+  "shortName": "simplet",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "SafeName",
+  "preferNameDirectory": true,
+  "symbols": {
+    "HostIdentifier": {
+      "type": "bind",
+      "binding": "HostIdentifier"
+    },
+    "OriginalName": {
+      "type": "generated",
+      "generator": "switch",
+      "replaces": ".API",
+      "parameters": {
+        "datatype": "string",
+        "cases": [
+          {
+            "condition": "(HostIdentifier != \"dotnetcli\" && HostIdentifier != \"dotnetcli-preview\")",
+            "value": ""
+          },
+          {
+            "condition": "(HostIdentifier == \"dotnetcli\" || HostIdentifier == \"dotnetcli-preview\")",
+            "value": ".API"
+          }
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "condition": "(HostIdentifier == \"dotnetcli\" || HostIdentifier == \"dotnetcli-preview\")",
+      "modifiers": [
+        {
+          "rename": {
+            "SafeName.API.csproj": "SafeName.csproj"
+          }
+        }
+      ]
+    }
+  ]
+}
